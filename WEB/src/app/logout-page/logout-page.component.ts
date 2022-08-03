@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logout-page',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutPageComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private router: Router) { }
+
+  
 
   ngOnInit(): void {
+   setTimeout(()=>{
+    this.changePage();
+   },
+   1000)
+  }
+
+  changePage(){
+    this.router.navigateByUrl('/login')
   }
 
 }

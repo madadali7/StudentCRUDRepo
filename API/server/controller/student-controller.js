@@ -20,9 +20,9 @@ exports.studentCreate = (req, res) => {
         password: req.body.password,
         address: req.body.address,
         city: req.body.city,
-        createdDate: req.body.createdDate,
+        createdDate: new Date(),
         updatedDate: req.body.updatedDate,
-        isVisiable: req.body.isVisiable
+        isVisiable: true
     })
 
     //save user in the database
@@ -30,13 +30,15 @@ exports.studentCreate = (req, res) => {
         res.send(data);
     })
         .catch(err => {
-            res.send(500).send();
+            res.status(500).send(err);
         });
 }
 
 exports.getStudent = (req,res)=>{
     const result = [];
-    studentModel.find().then(data=>{
+    var mysort = { createdDate: -1};  
+    studentModel.find().sort(mysort).
+    then(data=>{
         data.forEach(element => {
             if(element.isVisiable){
                 result.push(element);
@@ -60,7 +62,7 @@ exports.updateStudent = (req,res)=>{
     })
 }
 
-exports.deleteStudent = (req,res)=>{
+exports.deleteStudent = async (req,res)=>{
     const id = req.params.id;
     // studentModel.findByIdAndDelete(id)
     // .then(data=>{
@@ -70,7 +72,7 @@ exports.deleteStudent = (req,res)=>{
     //     res.status(500);
     // })
 
-    studentModel.findByIdAndUpdate(id,req.body, { useFindAndModify: false })
+    await studentModel.findByIdAndUpdate(id,req.body, { useFindAndModify: false })
     .then(data=>{
         res.status(200).send(data);
     })

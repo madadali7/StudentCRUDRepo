@@ -1,0 +1,46 @@
+<div class="bg-img">
+    <div class="container">
+
+        <header id="header">
+            <nav>
+                <div class="container">
+                    <div></div>
+                    <div class="text-center">
+                        <a class="nav-brand text-dark" style="font-weight: bold;">Student Mangement System</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    
+        <main id="site-main">
+            <div class="container">
+    
+                <div class="form-title text-center">
+                    <h2 class="text-white" style="font-weight: bold;">Login</h2>
+                </div>
+    
+                <!-- Form -->
+                <form id="add_user" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="new_user">
+                        <div class="form-group">
+                            <label class="text-white" for="Email" style="font-weight: bold;">Email</label>
+                            <input type="email" formControlName="email" required placeholder="example@gmail.com">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="text-white" for="password" style="font-weight: bold;">Password</label>
+                            <input type="password" formControlName="password" required >
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn text-dark update" style="font-weight: bold;" [disabled]="!loginForm.valid">Submit</button>
+                            <a routerLink="/register" style="margin-left: 41%; color: #ffff;">Register if you're new</a>
+                        </div>
+                    </div>
+                </form>
+    
+            </div>
+        </main>
+    
+    
+    </div>
+</div>

@@ -8,12 +8,16 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentDashboardComponent,
-    LogoutPageComponent
+    LogoutPageComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
   imports: [
     BrowserModule,

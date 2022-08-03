@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const dbUrl = 'mongodb+srv://CodeHubSolution:EWBM6SXOPuBcoQwH@cluster0.xa5usf0.mongodb.net/CodeHubDataBase?retryWrites=true&w=majority'
+dotenv.config({path: 'config.env'})
+const dbUrl = process.env.DB_URL
 
 const connectionParams = {
     useNewUrlParser: true,

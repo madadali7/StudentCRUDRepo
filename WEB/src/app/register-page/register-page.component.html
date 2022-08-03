@@ -1,0 +1,73 @@
+<div class="bg-img">
+    <div class="container">
+
+        <header id="header">
+            <nav>
+                <div class="container">
+                    <div></div>
+                    <div class="text-center">
+                        <a class="nav-brand text-dark">Student Mangement System</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    
+        <main id="site-main">
+            <div class="container">
+    
+                <div class="form-title text-center">
+                    <h2 class="text-white">Register a Student</h2>
+                </div>
+    
+                <!-- Form -->
+                <form id="add_user" autocomplete="off" [formGroup]="registrationForm" >
+                    <div class="new_user">
+                        <div class="registerForm col-md-12" style="display: flex;">
+                            <div class="form-group col-md-6" style="margin-right: 10px;">
+                                <label class="text-white" for="inputName">Student Name</label>
+                                <input type="text" formControlName="name" required placeholder="John">
+                            </div>
+        
+                            <div class="form-group col-md-6">
+                                <label class="text-white" for="inputClass">Class</label>
+                                <input type="number" formControlName="class" >
+                            </div>
+                        </div>
+
+                        <div class="registerForm col-md-12" style="display: flex;">
+                            <div class="form-group col-md-6" style="margin-right: 10px;">
+                                <label class="text-white" for="inputEmail4">Email</label>
+                                <input type="email" formControlName="email" required placeholder="example@gmail.com">
+                            </div>
+        
+                            <div class="form-group col-md-6">
+                                <label class="text-white" for="inputPassword4">Password</label>
+                                <input type="password" formControlName="password" required >
+                            </div>
+                        </div>
+
+                        <div class="registerForm col-md-12" style="display: flex;">
+                            <div class="form-group col-md-6" style="margin-right: 10px;">
+                                <label class="text-white" for="inputAddress">Address</label>
+                                <input type="text" formControlName="address" placeholder="Street Address">
+                            </div>
+        
+                            <div class="form-group col-md-6">
+                                <label class="text-white" for="inputCity">City</label>
+                                <input type="text" formControlName="city" >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="button" (click)="createStudent()" class="btn text-dark update" style="font-weight: bold;" [disabled]="!registrationForm.valid">Submit</button>
+                            <a routerLink="/login" style="margin-left: 44%;">Back to Login</a>
+                        </div>
+                    </div>
+                </form>
+    
+            </div>
+        </main>
+    
+    
+    </div>
+</div>
