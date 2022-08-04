@@ -46,7 +46,7 @@ export class RegisterPageComponent implements OnInit {
     this.api.postStudent(this.studentModel).subscribe(data => {
         debugger
         this.studentModel = data;
-        if (this.studentModel.email) {
+        if (this.studentModel.token) {
           this.messageService.success('Registered Successfully');
           this.registrationForm.reset();
           this.router.navigateByUrl('/dashboard')

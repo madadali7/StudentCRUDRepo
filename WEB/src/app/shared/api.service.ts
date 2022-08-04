@@ -22,7 +22,7 @@ export class ApiService {
   // Post Method For Add Student
   postStudent(student: StudentModel)
   {
-   return this._http.post(this.baseURL,student);
+   return this._http.post(this.baseURL+'/register',student);
   }
 
     // Get Method For All Student

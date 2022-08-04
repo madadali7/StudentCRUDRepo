@@ -1,6 +1,7 @@
 const { query } = require("express");
 const studentModel = require("../model/student-model");
 const bycrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 //Create API
 //Api for creating student detail.
@@ -32,8 +33,12 @@ exports.studentCreate = async (req, res) => {
     if (user) {
         res.status(201).send({message:"The Email Already Existed"});
     } else {
-        student.save(student).then(data => {
-            res.send(data);
+        student.save(student).then(async data  => {
+            const saved_user = await studentModel.findOne({email:email});
+            //Generate JWT Token
+            const token = jwt.sign({userId: saved_user._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
+            res.send({data,'token': token});
+
         }).catch(err => {
             res.status(500).send(err);
         });
@@ -49,13 +54,13 @@ exports.loginStudent = async (req, res) => {
             const user = await studentModel.findOne({ email: email });
             if (user != null) {
                 const isMatch = await bycrypt.compare(password, user.password);
-                if ((user.email === email) && isMatch) {
+                if ((user.email === email) && isMatch && (user.isVisiable)) {
                     res.status(200).send(user)
                 } else {
                     res.status(201).send({message:"Password is wrong"});
                 }
             } else {
-                res.status(500);
+                res.status(201).send({message:"Email is wrong"});
             }
         } else {
             res.status(500);

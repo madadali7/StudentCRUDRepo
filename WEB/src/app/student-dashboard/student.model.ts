@@ -8,5 +8,6 @@ export class StudentModel{
     password?:string;
     createdDate?: Date;
     updatedDate?: Date;
-    isVisiable?: Boolean
+    isVisiable?: Boolean;
+    token?: string;
 }
