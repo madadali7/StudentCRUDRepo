@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { StudentModel } from '../student-dashboard/student.model';
+import { LoginModel } from '../login-page/login.model';
 
 
 @Injectable({
@@ -12,6 +13,11 @@ export class ApiService {
   baseURL = 'http://localhost:5050/api/students'
 
   constructor(private _http:HttpClient) { }
+
+  //Login Method for User
+  loginStudent(loginDetail: LoginModel){
+    return this._http.post(this.baseURL +'/login',loginDetail);
+  }
 
   // Post Method For Add Student
   postStudent(student: StudentModel)

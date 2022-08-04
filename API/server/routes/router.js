@@ -6,6 +6,7 @@ const userController = require('../controller/user-controller')
 
 
 //API ROUTE
+route.post('/api/students/login',studentController.loginStudent);
 route.post('/api/students',studentController.studentCreate);
 route.get('/api/students',studentController.getStudent);
 route.put('/api/students/:id',studentController.updateStudent);

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ApiService } from '../shared/api.service';
+import { StudentModel } from '../student-dashboard/student.model';
+import { LoginModel } from './login.model';
 
 @Component({
   selector: 'app-login-page',
@@ -10,9 +14,13 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   loginForm! : UntypedFormGroup
+  loginModel: LoginModel = new LoginModel()
+  studentModel: StudentModel = new StudentModel();
 
-
-  constructor(private formBuilder: UntypedFormBuilder,private router: Router) { }
+  constructor(private formBuilder: UntypedFormBuilder,
+    private router: Router, 
+    private messageService: ToastrService,
+    private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -25,7 +33,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(){
-    this.router.navigateByUrl('dashboard')
+    this.loginModel.email = this.loginForm.controls['email'].value;
+    this.loginModel.password = this.loginForm.controls['password'].value;
+
+    this.apiService.loginStudent(this.loginModel).subscribe(data => {
+      debugger
+      this.studentModel = data;
+      if(this.studentModel.email){
+        this.router.navigateByUrl('dashboard')
+        this.messageService.success('Login Successfully')
+      }else{
+        this.messageService.error(`Didn't Match Email and Password`)
+      }
+    })
   }
 
 }
