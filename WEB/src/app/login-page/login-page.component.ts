@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../shared/api.service';
 import { StudentModel } from '../student-dashboard/student.model';
@@ -22,6 +23,8 @@ export class LoginPageComponent implements OnInit {
     private messageService: ToastrService,
     private apiService: ApiService) { }
 
+    jwtHelperService = new JwtHelperService();
+
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email:['',Validators.compose([
@@ -37,15 +40,50 @@ export class LoginPageComponent implements OnInit {
     this.loginModel.password = this.loginForm.controls['password'].value;
 
     this.apiService.loginStudent(this.loginModel).subscribe(data => {
-      debugger
       this.studentModel = data;
+      window.localStorage.setItem('token', `${this.studentModel.token}`);
+      let tokenExpirationTime = this.jwtHelperService.getTokenExpirationDate(`${this.studentModel.token}`);
+      var expirationTime = (this.getDataDiff(new Date(),tokenExpirationTime)).minute * 60000
+
+      debugger
+      
       if(this.studentModel.token){
-        this.router.navigateByUrl('dashboard')
-        this.messageService.success('Login Successfully')
+          this.router.navigateByUrl('dashboard')
+          this.messageService.success('Login Successfully')
+          setTimeout(()=>{
+            this.logout()
+          },2000)
       }else{
         this.messageService.error(`Didn't Match Email and Password`)
       }
     })
+  }
+
+  getDataDiff(startDate:Date, endDate:any) {
+    var diff = endDate.getTime() - startDate.getTime();
+    var days = Math.floor(diff / (60 * 60 * 24 * 1000));
+    var hours = Math.floor(diff / (60 * 60 * 1000)) - (days * 24);
+    var minutes = Math.floor(diff / (60 * 1000)) - ((days * 24 * 60) + (hours * 60));
+    var seconds = Math.floor(diff / 1000) - ((days * 24 * 60 * 60) + (hours * 60 * 60) + (minutes * 60));
+    return { day: days, hour: hours, minute: minutes, second: seconds };
+}
+
+
+
+  public isAuthenticated(): boolean {
+    debugger
+    console.log (localStorage['token']);
+    const token = localStorage.getItem('token');
+
+    // Check wheter the token is expired and return true or false
+    return !this.jwtHelperService.isTokenExpired(`${token}`);
+  }
+
+
+  logout(){
+    this.router.navigateByUrl('/logout')
+    this.messageService.warning('Your Session is out')
+    window.localStorage.clear();
   }
 
 }
