@@ -6,6 +6,8 @@ export class StudentModel{
     email?:string;
     city?:string;
     password?:string;
+    newPassword?:string;
+    confirmPassword?:string;
     createdDate?: Date;
     updatedDate?: Date;
     isVisiable?: Boolean;

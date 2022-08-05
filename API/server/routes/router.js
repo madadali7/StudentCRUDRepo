@@ -7,7 +7,8 @@ const userController = require('../controller/user-controller')
 
 //API ROUTE with Public
 route.post('/api/students/login',studentController.loginStudent);
-
+route.post('/api/students/email/confirm',studentController.confirmEmail);
+route.post('/api/students/password/reset/:id',studentController.resetPassword);
 
 //API ROUTE with AUTHORIZE
 route.post('/api/students/register',studentController.studentCreate);

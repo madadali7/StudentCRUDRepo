@@ -267,13 +267,9 @@ table{
 
 .bg-img{
     background-image: url("../src/assets/gallery_1_42_40798.jpg");
-
-  min-height: 380px;
-  padding-bottom: 60px;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 100vh;
+    margin: 3px auto 0;
+    position: relative;
 }

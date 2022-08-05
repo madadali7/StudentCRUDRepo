@@ -10,6 +10,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { LogoutPageComponent } from './logout-page/logout-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     StudentDashboardComponent,
     LogoutPageComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    PasswordResetComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     BrowserModule,

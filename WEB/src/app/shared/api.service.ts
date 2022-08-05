@@ -25,6 +25,15 @@ export class ApiService {
    return this._http.post(this.baseURL+'/register',student);
   }
 
+  resetPassword(id: any,student: StudentModel){
+   return this._http.post(this.baseURL+'/password/reset/'+id,student)
+  }
+
+  //Confirm Email for Reset Password
+  confirmEmail(student: StudentModel){
+    return this._http.post(this.baseURL+'/email/confirm',student);
+  }
+
     // Get Method For All Student
     getStudent()
     {

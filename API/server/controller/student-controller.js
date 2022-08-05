@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 //Create API
 //Api for creating student detail.
 exports.studentCreate = async (req, res) => {
-    console.log(req.body.class);
     //validate request
     if (!req.body.name) {
         res.status(400).send()
@@ -70,6 +69,39 @@ exports.loginStudent = async (req, res) => {
         console.log(error);
     }
 }
+
+exports.confirmEmail = async (req,res) =>{
+    const {email} = req.body;
+
+    const user = await studentModel.findOne({email:email});
+
+    if(user){
+        res.status(200).send(user);
+    }else{
+        res.status(201).send({message:'Email doesnt Existed'})
+    }
+}
+
+exports.resetPassword = async (req,res) =>{
+    const requestId = req.params.id;
+    const {newPassword, confirmPassword} = req.body;
+    console.log(requestId)
+    if(!req.body){
+        res.send(400)
+    }else{
+        if(newPassword === confirmPassword){
+           const user = await studentModel.findOne({_id: requestId});
+           const newHashPassword = await bycrypt.hash(newPassword,10);
+           const updatedUser= await studentModel.findByIdAndUpdate(user._id,{$set:{password:newHashPassword}});
+           res.status(200).send(true);
+        }else{
+            res.status(201).send({message:'Password and Confirm Password is not match'})
+        }
+    }
+
+
+}
+
 
 exports.getStudent = (req, res) => {
     const result = [];

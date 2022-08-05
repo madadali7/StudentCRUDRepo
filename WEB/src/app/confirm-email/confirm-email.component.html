@@ -16,29 +16,26 @@
             <div class="container">
 
                 <div class="form-title text-center">
-                    <h2 class="text-white" style="font-weight: bold;">Login</h2>
+                    <h2 class="text-white" style="font-weight: bold;">Trouble Logging In?</h2>
                 </div>
+                <div class="form-title text-center" style="margin-left: 33%;">
+                    <p style="width: 50%; color: #ffff;">Enter your email and we'll send you a link to get back into your account.</p>
+                    </div>
 
                 <!-- Form -->
-                <form id="add_user" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+                <form id="add_user" autocomplete="off" [formGroup]="emailConfirmForm" (ngSubmit)="confirm()">
                     <div class="new_user">
                         <div class="form-group">
                             <label class="text-white" for="Email" style="font-weight: bold;">Email</label>
                             <input type="email" formControlName="email" required placeholder="example@gmail.com">
                         </div>
 
-                        <div class="form-group">
-                            <label class="text-white" for="password" style="font-weight: bold;">Password</label>
-                            <input type="password" formControlName="password" required>
-                        </div>
+                       
                         <div class="form-group">
                             <button type="submit" class="btn text-dark update" style="font-weight: bold;"
-                                [disabled]="!loginForm.valid">Submit</button>
+                                [disabled]="!emailConfirmForm.valid">Confirm</button>
                             <div style="text-align: center;">
-                                <a routerLink="/password/reset" style="color: #ffff;">Forgot
-                                    Password?</a><br>
-                                <a routerLink="/register" style="color: #ffff;">Register if you're
-                                    new</a>
+                                <a routerLink="/login" style="color: #ffff;">Back To Login</a>
                             </div>
                         </div>
                     </div>
