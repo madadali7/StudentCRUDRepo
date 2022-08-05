@@ -52,10 +52,11 @@ exports.loginStudent = async (req, res) => {
 
         if (email && password) {
             const user = await studentModel.findOne({ email: email });
+            const token = jwt.sign({userId: user._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
             if (user != null) {
                 const isMatch = await bycrypt.compare(password, user.password);
                 if ((user.email === email) && isMatch && (user.isVisiable)) {
-                    res.status(200).send(user)
+                    res.status(200).send({user,'token': token})
                 } else {
                     res.status(201).send({message:"Password is wrong"});
                 }

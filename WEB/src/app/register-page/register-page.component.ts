@@ -44,16 +44,16 @@ export class RegisterPageComponent implements OnInit {
     this.studentModel.city = this.registrationForm.controls['city'].value;
 
     this.api.postStudent(this.studentModel).subscribe(data => {
-        debugger
-        this.studentModel = data;
-        if (this.studentModel.token) {
-          this.messageService.success('Registered Successfully');
-          this.registrationForm.reset();
-          this.router.navigateByUrl('/dashboard')
-        }else{
-          this.messageService.error('Email already Existed')
-        }
-      });
+      debugger
+      this.studentModel = data;
+      if (this.studentModel.token) {
+        this.messageService.success('Registered Successfully');
+        this.registrationForm.reset();
+        this.router.navigateByUrl('/dashboard')
+      } else {
+        this.messageService.error('Email already Existed')
+      }
+    });
 
 
   }

@@ -24,8 +24,8 @@
     </tr>
 </thead>
 <tbody>
-    <tr *ngFor="let student of allstudent">
-        <td>{{student}}</td>
+    <tr   *ngFor="let student of allstudent; let i = index">
+        <td>{{i+1}}</td>
         <td>{{student.name}}</td>
         <td>{{student.class}}</td>
         <td>{{student.email}}</td>

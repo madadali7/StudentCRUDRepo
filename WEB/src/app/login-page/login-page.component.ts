@@ -39,7 +39,7 @@ export class LoginPageComponent implements OnInit {
     this.apiService.loginStudent(this.loginModel).subscribe(data => {
       debugger
       this.studentModel = data;
-      if(this.studentModel.email){
+      if(this.studentModel.token){
         this.router.navigateByUrl('dashboard')
         this.messageService.success('Login Successfully')
       }else{
