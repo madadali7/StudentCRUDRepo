@@ -44,6 +44,7 @@ export class LoginPageComponent implements OnInit {
       window.localStorage.setItem('token', `${this.studentModel.token}`);
       let tokenExpirationTime = this.jwtHelperService.getTokenExpirationDate(`${this.studentModel.token}`);
       var expirationTime = (this.getDataDiff(new Date(),tokenExpirationTime)).minute * 60000
+      window.localStorage.setItem('expireIn',`${expirationTime}`)
 
       debugger
       
@@ -52,7 +53,7 @@ export class LoginPageComponent implements OnInit {
           this.messageService.success('Login Successfully')
           setTimeout(()=>{
             this.logout()
-          },2000)
+          },expirationTime)
       }else{
         this.messageService.error(`Didn't Match Email and Password`)
       }

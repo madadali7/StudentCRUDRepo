@@ -3,6 +3,7 @@ import { UntypedFormBuilder , UntypedFormGroup, Validators} from '@angular/forms
 import { ApiService } from '../shared/api.service';
 import { StudentModel } from './student.model';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -25,7 +26,8 @@ export class StudentDashboardComponent implements OnInit {
 
   constructor(private formBuilder:UntypedFormBuilder, 
     private api:ApiService, 
-    private messageService:ToastrService) { }
+    private messageService:ToastrService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
@@ -134,6 +136,11 @@ export class StudentDashboardComponent implements OnInit {
     this.isNew = !this.isNew;
   }
 
+  logout(){
+    this.router.navigateByUrl('/logout')
+    this.messageService.warning('Your Session is out')
+    window.localStorage.clear();
+  }
 
 
 }
