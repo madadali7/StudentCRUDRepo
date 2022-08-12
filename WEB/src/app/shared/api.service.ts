@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 import { StudentModel } from '../student-dashboard/student.model';
 import { LoginModel } from '../login-page/login.model';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -12,7 +14,9 @@ export class ApiService {
 
   baseURL = 'http://localhost:5050/api/students'
 
-  constructor(private _http:HttpClient) { }
+  constructor(private _http:HttpClient,
+    private router: Router,
+    private messageService: ToastrService) { }
 
   //Login Method for User
   loginStudent(loginDetail: LoginModel){
@@ -45,7 +49,6 @@ export class ApiService {
       // Put Method For Update Student
   putStudent(data:any, id:number)
   {
-    debugger
     return this._http.put<any>(this.baseURL+'/' + id,data).pipe(map((res:any)=> {
       return res
     }))
@@ -55,6 +58,12 @@ export class ApiService {
   deleteStudent(id:number)
   {
     return this._http.delete(this.baseURL+'/'+id);
+  }
+
+  logout(){
+    this.router.navigateByUrl('/logout')
+    this.messageService.warning('Your Session is out')
+    window.localStorage.clear();
   }
     
 }
