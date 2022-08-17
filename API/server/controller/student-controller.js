@@ -51,7 +51,7 @@ exports.loginStudent = async (req, res) => {
 
         if (email && password) {
             const user = await studentModel.findOne({ email: email });
-            const token = jwt.sign({userId: user._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
+            const token = jwt.sign({userId: user?._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
             if (user != null) {
                 const isMatch = await bycrypt.compare(password, user.password);
                 if ((user.email === email) && isMatch && (user.isVisiable)) {
