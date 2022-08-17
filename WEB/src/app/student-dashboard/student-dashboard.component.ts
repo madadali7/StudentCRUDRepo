@@ -139,7 +139,6 @@ export class StudentDashboardComponent implements OnInit {
   logout(){
     this.router.navigateByUrl('/logout')
     this.messageService.warning('Your Session is out')
-    window.localStorage.clear();
   }
 
 

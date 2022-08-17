@@ -14,6 +14,7 @@ export class ConfirmEmailComponent implements OnInit {
 
   emailConfirmForm! : UntypedFormGroup
   studentModel : StudentModel = new StudentModel;
+  confirmData : any;
 
   constructor(private formBuilder: UntypedFormBuilder,
     private router: Router,
@@ -22,7 +23,10 @@ export class ConfirmEmailComponent implements OnInit {
 
   ngOnInit(): void {
     this.emailConfirmForm = this.formBuilder.group({
-      email:['',Validators.required]
+      email:['',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])]
     })
   }
 
@@ -32,7 +36,9 @@ export class ConfirmEmailComponent implements OnInit {
 
     await this.apiService.confirmEmail(this.studentModel).subscribe(data=>{
        debugger
-       this.studentModel = data;
+       this.confirmData = data;
+       window.localStorage.setItem('token',this.confirmData.token);
+       this.studentModel = this.confirmData.user;
       if(this.studentModel.email){
         this.router.navigateByUrl('/account/password/reset/'+this.studentModel._id);
       }else{

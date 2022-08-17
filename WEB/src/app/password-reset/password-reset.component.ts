@@ -23,8 +23,8 @@ export class PasswordResetComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm = this.formBuilder.group({
-      newPassword:['',Validators.required],
-      confirmPassword:['',[Validators.required]]
+      newPassword:['',Validators.minLength(5)],
+      confirmPassword:['',[Validators.minLength(5)]]
     })
   }
 
@@ -40,21 +40,25 @@ export class PasswordResetComponent implements OnInit {
 // }
   
   resetPassword(){
+    const id = this.acitvatedRoute.snapshot.paramMap.get('id');
     this.studentModel.newPassword = this.resetForm.controls['newPassword'].value;
     this.studentModel.confirmPassword = this.resetForm.controls['confirmPassword'].value;
-
-    const id = this.acitvatedRoute.snapshot.paramMap.get('id');
     debugger
 
-    this.apiService.resetPassword(id,this.studentModel).subscribe(data =>{
-      debugger
-      if(data){
-        this.router.navigateByUrl('/login');
-        this.messageService.success('Password has been change')
-      }else{
-        this.messageService.error('Password and Confirm Password is Not Match')
-      }
-    })
+    if(this.studentModel.newPassword === this.studentModel.confirmPassword){
+      this.apiService.resetPassword(id,this.studentModel).subscribe(data =>{
+        debugger
+        if(data){
+          this.router.navigateByUrl('/login');
+          this.messageService.success('Password has been change')
+        }else{
+          this.messageService.error('Password and Confirm Password is Not Match')
+        }
+      })
+    }else{
+      this.messageService.error('Password and Confirm Password is Not matched')
+    }
+
   }
 
 }

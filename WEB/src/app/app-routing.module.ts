@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'login',component:LoginPageComponent},
   {path:'register',component:RegisterPageComponent},
   {path:'password/reset',component:ConfirmEmailComponent},
-  {path:'account/password/reset/:id',component:PasswordResetComponent},
+  {path:'account/password/reset/:id', canActivate: [AuthGuard] ,component:PasswordResetComponent},
   {path: '**', redirectTo: 'login'}
 ];
 
