@@ -11,11 +11,13 @@ exports.studentCreate = async (req, res) => {
         res.status(400).send()
         return
     }
+    console.log(req.body);
 
     //new User
     const student = new studentModel({
         name: req.body.name,
-        class: req.body.class,
+        class: req.body?.class,
+        phoneNumber: req.body.phoneNumber,
         email: req.body.email,
         password: req.body.password,
         address: req.body.address,

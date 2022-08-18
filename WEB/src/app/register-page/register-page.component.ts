@@ -27,6 +27,7 @@ export class RegisterPageComponent implements OnInit {
       name: ['', Validators.required],
       class: [''],
       address: [''],
+      phoneNumber: [''],
       city: [''],
       email: ['', Validators.compose([
         Validators.required,
@@ -41,6 +42,7 @@ export class RegisterPageComponent implements OnInit {
     this.studentModel.name = this.registrationForm.controls['name'].value;
     this.studentModel.class = this.registrationForm.controls['class'].value;
     this.studentModel.email = this.registrationForm.controls['email'].value;
+    this.studentModel.phoneNumber = this.registrationForm.controls['phoneNumber'].value;
     this.studentModel.password = this.registrationForm.controls['password'].value;
     this.studentModel.address = this.registrationForm.controls['address'].value;
     this.studentModel.city = this.registrationForm.controls['city'].value;

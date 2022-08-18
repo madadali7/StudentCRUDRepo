@@ -178,6 +178,17 @@ table{
     border-radius: .2em;
 }
 
+#update_user .form-group input[type="tel"],
+#add_user .form-group input[type="tel"]{
+    width: 100%;
+    padding: .6em 1em;
+    margin: .5em 0;
+    border: 1px solid var(--border);
+    font-family: 'Barlow', sans-serif;
+    font-size: 1em;
+    border-radius: .2em;
+}
+
 #update_user .form-group input[type="number"],
 #add_user .form-group input[type="number"]{
     width: 100%;

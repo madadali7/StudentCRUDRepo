@@ -34,6 +34,7 @@ export class StudentDashboardComponent implements OnInit {
       name:['',Validators.required],
       class:[''],
       email:['',Validators.required],
+      phoneNumber:['',Validators.required],
       address:[''],
       city:[''],
       password:['',Validators.required]
@@ -50,7 +51,6 @@ export class StudentDashboardComponent implements OnInit {
     this.studentobj.class = this.formValue.value.class;
     this.studentobj.createdDate = new Date();
     this.studentobj.isVisiable = true;
-    debugger
     this.api.postStudent(this.studentobj).subscribe(res=>{
       this.messageService.success("Student Added");
       this.AllStudent();
@@ -61,7 +61,6 @@ export class StudentDashboardComponent implements OnInit {
 
   AllStudent(){
     this.api.getStudent().subscribe(res => {
-      debugger
       this.allstudent = res;
     })
   }
@@ -75,6 +74,7 @@ export class StudentDashboardComponent implements OnInit {
     this.formValue.controls['address'].setValue(data.address);
     this.formValue.controls['email'].setValue(data.email);
     this.formValue.controls['class'].setValue(data.class);
+    this.formValue.controls['phoneNumber'].setValue(data.phoneNumber);
     this.formValue.controls['password'].setValue(data.password);
     this.studentobj._id = data._id;
     this.UpdateShowBtn();
@@ -99,12 +99,13 @@ export class StudentDashboardComponent implements OnInit {
 
 
   DeleteStudent(id:any){
-    debugger
+    //This delete Api is for Permenatly delete
     // this.api.deleteStudent(id).subscribe(res => {
     //   this.AllStudent();
     //   this.messageService.error('Deleted')
     // })
 
+    //And This one is for isVisiable?
     this.studentobj.isVisiable = false;
     debugger
     this.api.putStudent(this.studentobj,id).subscribe(res=>{
@@ -139,7 +140,6 @@ export class StudentDashboardComponent implements OnInit {
   logout(){
     this.router.navigateByUrl('/logout')
     this.messageService.warning('Your Session is out')
-    window.localStorage.clear();
   }
 
 

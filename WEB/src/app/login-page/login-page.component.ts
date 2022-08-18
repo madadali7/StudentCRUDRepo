@@ -40,15 +40,14 @@ export class LoginPageComponent implements OnInit {
     this.loginModel.password = this.loginForm.controls['password'].value;
 
     this.apiService.loginStudent(this.loginModel).subscribe(data => {
-      this.studentModel = data;
-      window.localStorage.setItem('token', `${this.studentModel.token}`);
-      let tokenExpirationTime = this.jwtHelperService.getTokenExpirationDate(`${this.studentModel.token}`);
-      var expirationTime = (this.getDataDiff(new Date(),tokenExpirationTime)).minute * 60000
-      window.localStorage.setItem('expireIn',`${expirationTime}`)
-
       debugger
-      
+      this.studentModel = data;
+     
       if(this.studentModel.token){
+        window.localStorage.setItem('token', `${this.studentModel.token}`);
+        let tokenExpirationTime = this.jwtHelperService.getTokenExpirationDate(`${this.studentModel.token}`);
+        var expirationTime = (this.getDataDiff(new Date(),tokenExpirationTime)).minute * 60000
+        window.localStorage.setItem('expireIn',`${expirationTime}`)
           this.router.navigateByUrl('dashboard')
           this.messageService.success('Login Successfully')
           setTimeout(()=>{

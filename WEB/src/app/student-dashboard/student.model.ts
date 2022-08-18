@@ -12,4 +12,5 @@ export class StudentModel{
     updatedDate?: Date;
     isVisiable?: Boolean;
     token?: string;
+    phoneNumber?: string;
 }

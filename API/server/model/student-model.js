@@ -11,6 +11,7 @@ var studentSchema = new mongoose.Schema({
     address: String,
     city: String,
     class: String,
+    phoneNumber: String,
     createdDate: Date,
     updatedDate: Date,
     isVisiable: Boolean
