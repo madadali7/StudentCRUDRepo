@@ -14,6 +14,7 @@ export class PasswordResetComponent implements OnInit {
 
   resetForm!: UntypedFormGroup
   studentModel: StudentModel = new StudentModel;
+  confirmData: any;
 
   constructor(private formBuilder: UntypedFormBuilder,
     private apiService: ApiService,
@@ -28,31 +29,19 @@ export class PasswordResetComponent implements OnInit {
     })
   }
 
-//   private passwordMatcher(control: FormControl) {
-//     debugger
-//     if (
-//         this.resetForm &&
-//         (control.value !== this.resetForm.controls['newPassword'].value)
-//     ) {
-//         return { passwordNotMatch: true };
-//     }
-//     return null;
-// }
-  
   resetPassword(){
     const id = this.acitvatedRoute.snapshot.paramMap.get('id');
     this.studentModel.newPassword = this.resetForm.controls['newPassword'].value;
     this.studentModel.confirmPassword = this.resetForm.controls['confirmPassword'].value;
-    debugger
 
     if(this.studentModel.newPassword === this.studentModel.confirmPassword){
       this.apiService.resetPassword(id,this.studentModel).subscribe(data =>{
-        debugger
-        if(data){
+        this.confirmData = data;
+        if(this.confirmData._id){
           this.router.navigateByUrl('/login');
           this.messageService.success('Password has been change')
         }else{
-          this.messageService.error('Password and Confirm Password is Not Match')
+          this.messageService.error(this.confirmData.message)
         }
       })
     }else{

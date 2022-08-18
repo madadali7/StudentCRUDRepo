@@ -85,6 +85,7 @@ export class StudentDashboardComponent implements OnInit {
     this.studentobj.city = this.formValue.value.city;
     this.studentobj.name = this.formValue.value.name;
     this.studentobj.email = this.formValue.value.email;
+    this.studentobj.phoneNumber = this.formValue.value.phoneNumber;
     this.studentobj.class = this.formValue.value.class;
     this.studentobj.updatedDate = new Date();
 

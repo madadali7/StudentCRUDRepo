@@ -75,7 +75,7 @@ exports.loginStudent = async (req, res) => {
 exports.confirmEmail = async (req,res) =>{
     const {email} = req.body;
 
-    const user = await studentModel.findOne({email:email});
+    const user = await studentModel.findOne({email:email}).select("-password");
     const token = jwt.sign({userId: user?._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
     if(user){
         res.status(200).send({user, 'token':token});
@@ -94,8 +94,13 @@ exports.resetPassword = async (req,res) =>{
         if(newPassword === confirmPassword){
            const user = await studentModel.findOne({_id: requestId});
            const newHashPassword = await bycrypt.hash(newPassword,10);
-           const updatedUser= await studentModel.findByIdAndUpdate(user._id,{$set:{password:newHashPassword}});
-           res.status(200).send(true);
+           const isMatch = await bycrypt.compare(newPassword, user.password);
+           if(!isMatch){
+               const updatedUser= await studentModel.findByIdAndUpdate(user._id,{$set:{password:newHashPassword}}).select("-password");
+               res.status(200).send(updatedUser);
+           }else{
+            res.status(201).send({message: 'This Password is already used'})
+           }
         }else{
             res.status(201).send({message:'Password and Confirm Password is not match'})
         }

@@ -32,14 +32,15 @@ export class ConfirmEmailComponent implements OnInit {
 
   async confirm(){
 
+    debugger
     this.studentModel.email = this.emailConfirmForm.controls['email'].value;
 
     await this.apiService.confirmEmail(this.studentModel).subscribe(data=>{
        debugger
        this.confirmData = data;
-       window.localStorage.setItem('token',this.confirmData.token);
-       this.studentModel = this.confirmData.user;
-      if(this.studentModel.email){
+       if(this.confirmData?.token){
+         this.studentModel = this.confirmData?.user;
+        window.localStorage.setItem('token',this.confirmData?.token);
         this.router.navigateByUrl('/account/password/reset/'+this.studentModel._id);
       }else{
         this.messageService.error('Email doesnt existed')
