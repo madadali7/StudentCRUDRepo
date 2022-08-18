@@ -50,7 +50,7 @@ export class PasswordResetComponent implements OnInit {
 
   }
 
-  resetPassword2(){
+  resetPassword5(){
     const id = this.acitvatedRoute.snapshot.paramMap.get('id');
     this.studentModel.newPassword = this.resetForm.controls['newPassword'].value;
     this.studentModel.confirmPassword = this.resetForm.controls['confirmPassword'].value;
