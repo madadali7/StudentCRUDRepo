@@ -7,7 +7,7 @@ var studentSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    password: String,
+    password: {type: String, select: false},
     address: String,
     city: String,
     class: String,
