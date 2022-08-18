@@ -26,6 +26,7 @@ export class LoginPageComponent implements OnInit {
     jwtHelperService = new JwtHelperService();
 
   ngOnInit(): void {
+    window.localStorage.clear();
     this.loginForm = this.formBuilder.group({
       email:['',Validators.compose([
         Validators.required,

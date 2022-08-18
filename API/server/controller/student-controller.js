@@ -76,9 +76,9 @@ exports.confirmEmail = async (req,res) =>{
     const {email} = req.body;
 
     const user = await studentModel.findOne({email:email});
-
+    const token = jwt.sign({userId: user?._id},process.env.JWT_SECRET_KEY, {expiresIn: '60m'});
     if(user){
-        res.status(200).send(user);
+        res.status(200).send({user, 'token':token});
     }else{
         res.status(201).send({message:'Email doesnt Existed'})
     }
