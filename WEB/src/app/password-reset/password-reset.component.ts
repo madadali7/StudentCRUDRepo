@@ -50,4 +50,25 @@ export class PasswordResetComponent implements OnInit {
 
   }
 
+  resetPassword5(){
+    const id = this.acitvatedRoute.snapshot.paramMap.get('id');
+    this.studentModel.newPassword = this.resetForm.controls['newPassword'].value;
+    this.studentModel.confirmPassword = this.resetForm.controls['confirmPassword'].value;
+
+    if(this.studentModel.newPassword === this.studentModel.confirmPassword){
+      this.apiService.resetPassword(id,this.studentModel).subscribe(data =>{
+        this.confirmData = data;
+        if(this.confirmData._id){
+          this.router.navigateByUrl('/login');
+          this.messageService.success('Password has been change')
+        }else{
+          this.messageService.error(this.confirmData.message)
+        }
+      })
+    }else{
+      this.messageService.error('Password and Confirm Password is Not matched')
+    }
+
+  }
+
 }
