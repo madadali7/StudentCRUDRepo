@@ -32,11 +32,9 @@ export class ConfirmEmailComponent implements OnInit {
 
   async confirm(){
 
-    debugger
     this.studentModel.email = this.emailConfirmForm.controls['email'].value;
 
     await this.apiService.confirmEmail(this.studentModel).subscribe(data=>{
-       debugger
        this.confirmData = data;
        if(this.confirmData?.token){
          this.studentModel = this.confirmData?.user;

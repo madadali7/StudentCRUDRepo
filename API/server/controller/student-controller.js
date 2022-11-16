@@ -57,7 +57,8 @@ exports.loginStudent = async (req, res) => {
             if (user != null) {
                 const isMatch = await bycrypt.compare(password, user.password);
                 if ((user.email === email) && isMatch && (user.isVisiable)) {
-                    res.status(200).send({user,'token': token})
+                    const userDetails = await studentModel.findOne({ email: email });
+                    res.status(200).send({userDetails,'token': token})
                 } else {
                     res.status(201).send({message:"Password is wrong"});
                 }
@@ -87,7 +88,6 @@ exports.confirmEmail = async (req,res) =>{
 exports.resetPassword = async (req,res) =>{
     const requestId = req.params.id;
     const {newPassword, confirmPassword} = req.body;
-    console.log(requestId)
     if(!req.body){
         res.send(400)
     }else{

@@ -41,7 +41,6 @@ export class LoginPageComponent implements OnInit {
     this.loginModel.password = this.loginForm.controls['password'].value;
 
     this.apiService.loginStudent(this.loginModel).subscribe(data => {
-      debugger
       this.studentModel = data;
      
       if(this.studentModel.token){
@@ -72,7 +71,6 @@ export class LoginPageComponent implements OnInit {
 
 
   public isAuthenticated(): boolean {
-    debugger
     console.log (localStorage['token']);
     const token = localStorage.getItem('token');
 

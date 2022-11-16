@@ -108,7 +108,6 @@ export class StudentDashboardComponent implements OnInit {
 
     //And This one is for isVisiable?
     this.studentobj.isVisiable = false;
-    debugger
     this.api.putStudent(this.studentobj,id).subscribe(res=>{
       this.AllStudent();
       this.messageService.error('Deleted')

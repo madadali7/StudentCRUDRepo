@@ -11,6 +11,7 @@
         </div>
       </div>
   </nav>
+<div style="overflow-x:auto;">
 <table class="table table-striped">
 <thead>
     <tr>
@@ -32,13 +33,14 @@
         <td>{{student.phoneNumber}}</td>
         <td>{{student.address}}</td>
         <td>{{student.city}}</td>
-        <td>
+        <td style="display: flex; justify-content: center;">
             <input type="button" value="Edit" (click)="EditStudent(student)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success me-2"/>
             <input type="button" value="Delete" (click)="DeleteStudent(student._id)" class="btn btn-danger"/>
         </td>
     </tr>
 </tbody>
 </table>
+</div>
 
 
 
