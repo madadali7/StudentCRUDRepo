@@ -2,6 +2,16 @@
 2) npm start API Project.
 3) ng serve --open WEB Project.
 
+4) In Case if you faced this error on API project:
+(Error Error: querySrv ENOTFOUND _mongodb._tcp.cluster0.xa5usf0.mongodb.net
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/callback_resolver:47:19) {
+  errno: undefined,
+  code: 'ENOTFOUND',
+  syscall: 'querySrv',
+  hostname: '_mongodb._tcp.cluster0.xa5usf0.mongodb.net')
+
+Then Try to connect other networks on your system, Or you can connect your hotspot for just testing my project.
+
 
 #Student Management Login Form
 ![Login Page](https://user-images.githubusercontent.com/100954492/186190883-7493cc16-88ce-45a9-b7a1-c52df30e4d09.png)
