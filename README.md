@@ -1,6 +1,6 @@
 1) npm install both WEB and API PROJECT.
-2) npmm start API.
-3) ng serve --open WEB.
+2) npm start API Project.
+3) ng serve --open WEB Project.
 
 
 #Student Management Login Form
